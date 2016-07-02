@@ -41,6 +41,8 @@ typedef struct
 } range_t;
 
 // NOTE: This stack size is more than large enough because for lg(n) > 256 implies a REALLY big n.
+//       With the caveat that if we don't randomize our quicksort we risk not being able to
+//       balance sufficiently in which case this stack size does become a problem.
 static range_t stack[256];
 static int stack_size;
 #define push(range) stack[stack_size++] = (range)

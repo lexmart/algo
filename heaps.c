@@ -161,7 +161,7 @@ void heap_insert(heap_t *heap, int key)
 }
 
 /* this version of heap sort is not "in place" since build_max_heap copies, but it would be trivial to change */
-void heap_sort(int array[], int n)
+void heapsort(int array[], int n)
 {
     heap_t heap = init_heap();
     build_max_heap(&heap, array, n);
@@ -184,7 +184,7 @@ int main()
 #endif
     
 #if 0
-    heap_sort(a, array_count(a));
+    heapsort(a, array_count(a));
     print_array(a);
 #endif
     
