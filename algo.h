@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <limits.h>
+#include <stdbool.h>
 
 typedef uint8_t u8;
 typedef uint16_t u16;
@@ -37,3 +38,31 @@ void print_array_(int array[], int n)
     printf("\n");
 }
 #define print_array(array) print_array_(array, array_count(array))
+
+inline void random_array(int array[], int n)
+{
+    for(int i = 0; i < n; i++)
+    {
+        array[i] = (rand() % 100);
+    }
+}
+
+inline b32 is_array_sorted(int array[], int n)
+{
+    b32 result = true;
+    for(int i = 1; i < n; i++)
+    {
+        if(array[i] < array[i - 1])
+        {
+            result = false;
+        }
+    }
+    return result;
+}
+
+inline void swap(int *a, int *b)
+{
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}

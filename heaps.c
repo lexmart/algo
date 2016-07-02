@@ -33,13 +33,6 @@ inline int right_child(int i)
     return (2*i) + 1;
 }
 
-inline void swap(int *a, int *b)
-{
-    int temp = *a;
-    *a = *b;
-    *b = temp;
-}
-
 // NOTE: for reasons nodes are 1-indexed
 inline int *get_node(heap_t *heap, int i)
 {
