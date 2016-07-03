@@ -79,6 +79,7 @@ void quicksort_iterative_(int array[], int n)
 
 #define quicksort_iterative(array) quicksort_iterative_(array, array_count(array))
 
+#if 0
 int main()
 {
     srand(time(0));
@@ -111,3 +112,4 @@ int main()
     getchar();
     return 0;
 }
+#endif

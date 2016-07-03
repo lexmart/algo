@@ -1,3 +1,5 @@
+#ifndef ALGO_H
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
@@ -66,3 +68,16 @@ inline void swap(int *a, int *b)
     *a = *b;
     *b = temp;
 }
+
+inline int random_int(int min, int max)
+{
+    int range = max - min;
+    int offset = rand() / (RAND_MAX / range);
+    
+    int result = min + offset;
+    assert((result >= min) && (result <= max));
+    return result;
+}
+
+#define ALGO_H
+#endif
