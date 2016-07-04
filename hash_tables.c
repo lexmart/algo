@@ -13,15 +13,15 @@ typedef struct hash_entry_t
 
 typedef struct 
 {
-    hash_entry_t *slots[10];
-} hash_table_chaining_t;
+    hash_entry_t *slots[15];
+} hash_table_t;
 
-void init_hash_table(hash_table_chaining_t *table)
+void init_hash_table(hash_table_t *table)
 {
     for(int i = 0; i < array_count(table->slots); i++) table->slots[i] = 0;
 }
 
-void free_hash_table(hash_table_chaining_t *table)
+void free_hash_table(hash_table_t *table)
 {
     for(int slot_index = 0; slot_index < array_count(table->slots); slot_index++)
     {
@@ -44,7 +44,7 @@ inline int hash1(int hash_count, int value)
     return (int)result;
 }
 
-hash_entry_t *search_chaining(hash_table_chaining_t *table, int value)
+hash_entry_t *search_chaining(hash_table_t *table, int value)
 {
     int hash_value = hash1(array_count(table->slots), value);
     
@@ -61,7 +61,7 @@ hash_entry_t *search_chaining(hash_table_chaining_t *table, int value)
     return 0;
 }
 
-void insert_chaining(hash_table_chaining_t *table, int value)
+void insert_chaining(hash_table_t *table, int value)
 {
     if(!search_chaining(table, value))
     {
@@ -74,7 +74,7 @@ void insert_chaining(hash_table_chaining_t *table, int value)
     }
 }
 
-void delete_chaining(hash_table_chaining_t *table, int value)
+void delete_chaining(hash_table_t *table, int value)
 {
     int hash_value = hash1(array_count(table->slots), value);
     
@@ -106,11 +106,6 @@ void delete_chaining(hash_table_chaining_t *table, int value)
 
 /* Probing hash table */
 
-typedef struct
-{
-    hash_entry_t *slots[15];
-} hash_table_probing_t;
-
 inline int hash2(int hash_count, int value)
 {
     int result = (value + 3) % hash_count;
@@ -124,7 +119,7 @@ inline int double_hash_probe(int hash_count, int value, int probe_index)
     return result;
 }
 
-hash_entry_t *search_probing(hash_table_probing_t *table, int value)
+hash_entry_t *search_probing(hash_table_t *table, int value)
 {
     hash_entry_t *result = 0;
     for(int probe_index = 0; probe_index < array_count(table->slots); probe_index++)
@@ -142,7 +137,7 @@ hash_entry_t *search_probing(hash_table_probing_t *table, int value)
     return result;
 }
 
-void insert_probing(hash_table_probing_t *table, int value)
+void insert_probing(hash_table_t *table, int value)
 {
     for(int probe_index = 0; probe_index < array_count(table->slots); probe_index++)
     {        
@@ -161,7 +156,7 @@ void insert_probing(hash_table_probing_t *table, int value)
     assert("out of space");
 }
 
-void delete_probing(hash_table_probing_t *table, int value)
+void delete_probing(hash_table_t *table, int value)
 {
     for(int probe_index = 0; probe_index < array_count(table->slots); probe_index++)
     {        
@@ -181,7 +176,7 @@ int main()
 {
     srand(time(0));
     
-    hash_table_chaining_t table;
+    hash_table_t table;
     init_hash_table(&table);
     
     insert_chaining(&table, 4);
@@ -220,7 +215,7 @@ int main()
     
     
     
-    hash_table_probing_t table2;
+    hash_table_t table2;
     for(int i = 0; i < array_count(table2.slots); i++) table2.slots[i] = 0;
     
     insert_probing(&table2, 4);
