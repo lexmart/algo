@@ -241,10 +241,16 @@ int main()
     insert(&bst, 8);
     insert(&bst, -4);
     insert(&bst, -2);
+    verify_children_linked_to_parents(bst.root);
 
     
     print_tree(bst.root);
     delete(&bst, search(&bst, 6));
     print_tree(bst.root);
+    
+    verify_children_linked_to_parents(bst.root);
+    
+    free_tree(bst.root);
+    
     getchar();
 }
