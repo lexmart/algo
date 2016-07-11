@@ -137,19 +137,19 @@ void print_tree(node_t *node)
 #define PARENT(i) ((i-1) / 2)
 #define LINE_WIDTH 128
     
-    int *print_pos = malloc(num_nodes*sizeof(int));
+    int *print_pos = (int *)malloc(num_nodes*sizeof(int));
     int i, j, k, pos, x=1, level=0;
     
     print_pos[0] = 0;
     for(i = 0,j = 1; i < num_nodes; i++,j++) {
-        pos = print_pos[PARENT(i)] + (i%2?-1:1)*(LINE_WIDTH/(pow(2,level+1))+1);
+        pos = print_pos[PARENT(i)] + (i%2?-1:1)*(LINE_WIDTH/(pow((double)2,level+1))+1);
         
         for (k=0; k<pos-x; k++) printf("%c",i==0||i%2?' ':'=');
         if(tree[i]) printf("%d",tree[i]->value);
         else printf("=");
         
         print_pos[i] = x = pos+1;
-        if (j==pow(2,level)) {
+        if (j==pow((float)2,level)) {
             printf("\n");
             level++;
             x = 1;
@@ -178,6 +178,12 @@ void int_to_string(int value, char *output, int output_count)
         output[j] = temp;
     }
 }
+
+// NOTE: Get pointer to element in 2d array represented by a pointer
+#define g2d(array, width, i, j) (&((array)[(i)*(width) + (j)]))
+
+#define maximum(a, b) (((a) >= (b)) ? (a) : (b))
+#define minimum(a, b) (((a) <= (b)) ? (a) : (b))
 
 #define ALGO_H
 #endif
